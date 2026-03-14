@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h3>Doctor Panel</h3>
+
+<a href="/doctor/dashboard">Dashboard</a>
+<br><br>
+
+<a href="/doctor/slots">Manage Slots</a>
+<br><br>
+
+<a href="/logout">Logout</a>
+
+</div>
+
+<div class="dashboard">
+
+<h2>Today's Patients</h2>
+
+<table class="table">
+
+<tr>
+<th>Token</th>
+<th>Patient</th>
+<th>Time</th>
+<th>Status</th>
+</tr>
+
+{% for p in patients %}
+
+<tr>
+
+<td>{{p.token}}</td>
+
+<td>{{p.name}}</td>
+
+<td>{{p.time}}</td>
+
+<td>{{p.status}}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

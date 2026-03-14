@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Login</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<style>#particle-canvas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+
+background:linear-gradient(135deg,#eef4ff,#e6f0ff);
+}
+
+.auth-container{
+position:relative;
+z-index:2;
+}</style>
+
+</head>
+
+<body class="auth-page">
+
+<canvas id="particle-canvas"></canvas>
+<div class="bg-animation"></div>
+
+<div class="auth-container">
+
+<div class="auth-left">
+
+<h2>Protect Yourself and Your Family</h2>
+<p>Easy Online Appointments</p>
+
+<img src="{{ url_for('static', filename='images/doctor1.webp') }}">
+
+</div>
+
+
+<div class="auth-right">
+
+<h2>Login</h2>
+
+<div class="auth-tabs">
+
+<a href="/register">
+<button>New Patient</button>
+</a>
+
+<a href="/login">
+<button class="active">Existing Patient</button>
+</a>
+<a href="/">
+    <button>Home</button>
+</a>
+</div>
+<!-- 
+<form method="POST" class="auth-form" action="{{ url_for('auth.login', next=next) }}">
+    <input type="text" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button class="auth-btn">Login</button>
+</form> -->
+{% if error %}
+<p style="color:red; text-align:center;">{{ error }}</p>
+{% endif %}
+<form method="POST" class="auth-form">
+<input type="text" name="email" placeholder="Email" required>
+
+<input type="password" name="password" placeholder="Enter Password" required>
+
+<button type="submit" class="auth-btn">Login</button>
+
+</form>
+
+
+<div class="auth-link">
+<a href="/register"><strong>Create an account</strong></a>
+</div>
+
+</div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

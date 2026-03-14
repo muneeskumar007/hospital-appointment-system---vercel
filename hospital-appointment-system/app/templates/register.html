@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Register</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+.auth-page{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background:#f5f7fb;
+font-family:Arial;
+}
+#particle-canvas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+
+background:linear-gradient(135deg,#eef4ff,#e6f0ff);
+}
+
+.auth-container{
+position:relative;
+z-index:2;
+}
+
+.auth-container{
+display:flex;
+width:900px;
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* LEFT SIDE */
+
+.auth-left{
+flex:1;
+padding:40px;
+text-align:center;
+background:#f9fbff;
+}
+
+.auth-left img{
+width:250px;
+margin-top:20px;
+}
+
+/* RIGHT SIDE */
+
+.auth-right{
+flex:1;
+padding:40px;
+}
+
+/* TABS */
+
+.auth-tabs{
+display:flex;
+gap:10px;
+margin-bottom:20px;
+}
+
+.auth-tabs button{
+padding:8px 15px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+background:#e9eefc;
+}
+
+.auth-tabs .active{
+background:#2d6cdf;
+color:white;
+}
+
+/* FORM */
+
+.auth-form{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.auth-form input,
+.auth-form select{
+padding:10px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+.auth-btn{
+background:#2d6cdf;
+color:white;
+padding:12px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.auth-link{
+margin-top:10px;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body class="auth-page">
+
+<div class="bg-animation"></div>
+<canvas id="particle-canvas"></canvas>
+
+<div class="auth-container">
+
+<!-- LEFT SIDE -->
+
+<div class="auth-left">
+
+<h2>Join Our Healthcare Community</h2>
+
+<p>Create your account for easy appointment booking</p>
+
+<img src="{{ url_for('static', filename='images/doctor2.jpg') }}">
+
+</div>
+
+<!-- RIGHT SIDE -->
+
+<div class="auth-right">
+
+<h2>Patient Registration</h2>
+
+<div class="auth-tabs">
+
+<a href="/register">
+<button class="active">New Patient</button>
+</a>
+
+<a href="/login">
+<button>Existing Patient</button>
+</a>
+
+<a href="/">
+<button>Home</button>
+</a>
+
+</div>
+
+<form method="POST" class="auth-form">
+
+<input type="text" name="name" placeholder="Full Name" required>
+
+<input type="email" name="email" placeholder="Email" required>
+
+<input type="password" name="password" placeholder="Password" required>
+
+<select name="role" required>
+
+<option value="">Select Role</option>
+<option value="patient">Patient</option>
+<option value="doctor">Doctor</option>
+
+</select>
+
+<button class="auth-btn">Create Account</button>
+
+</form>
+
+<div class="auth-link">
+
+<a href="/login">
+Already have an account? <strong>Login</strong>
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

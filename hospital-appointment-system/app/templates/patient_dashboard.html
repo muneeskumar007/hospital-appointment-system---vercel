@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Patient Dashboard</title>
+</head>
+<body>
+
+<h2>Available Doctors</h2>
+
+<table border="1">
+<tr>
+<th>Name</th>
+<th>Specialization</th>
+<th>Action</th>
+</tr>
+
+{% for doctor in doctors %}
+<tr>
+<td>{{ doctor[1] }}</td>
+<td>{{ doctor[2] }}</td>
+<td>
+<button>Book Appointment</button>
+</td>
+</tr>
+{% endfor %}
+
+</table>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <h2>🏥 HospitalCare</h2>
+
+        <div>
+            <a href="/patient_dashboard">Dashboard</a>
+            <a href="/appointment">Book Appointment</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+</header>
+
+
+<section class="dashboard">
+
+    <h1>Welcome, Patient</h1>
+
+    <div class="dashboard-container">
+
+        <div class="card">
+            <h3>📅 Book Appointment</h3>
+            <p>Schedule a new appointment with a doctor.</p>
+            <a href="/appointment">
+                <button>Book Now</button>
+            </a>
+        </div>
+
+        <div class="card">
+            <h3>📋 My Appointments</h3>
+            <p>View your upcoming and previous appointments.</p>
+            <a href="/appointments">
+                <button>View</button>
+            </a>
+        </div>
+
+        <div class="card">
+            <h3>👤 Profile</h3>
+            <p>View and update your personal information.</p>
+            <a href="/profile">
+                <button>Open</button>
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="appointment-table">
+
+    <h2>Recent Appointments</h2>
+
+    <table>
+
+        <tr>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+
+        <tr>
+            <td>Dr. Smith</td>
+            <td>15 March 2026</td>
+            <td>Confirmed</td>
+        </tr>
+
+        <tr>
+            <td>Dr. John</td>
+            <td>10 March 2026</td>
+            <td>Completed</td>
+        </tr>
+
+    </table>
+
+</section>
+
+</body>
+</html>

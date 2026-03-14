@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h3>Admin</h3>
+
+<a href="/admin">Dashboard</a>
+<br><br>
+
+<a href="/admin/doctors">Doctors</a>
+<br><br>
+
+<a href="/admin/patients">Patients</a>
+
+</div>
+
+<div class="dashboard">
+
+<h2>System Statistics</h2>
+
+<div class="doctor-grid">
+
+<div class="card">
+<h3>Total Doctors</h3>
+<p>{{doctor_count}}</p>
+</div>
+
+<div class="card">
+<h3>Total Patients</h3>
+<p>{{patient_count}}</p>
+</div>
+
+<div class="card">
+<h3>Total Appointments</h3>
+<p>{{appointment_count}}</p>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

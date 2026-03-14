@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h3>Patient</h3>
+
+<a href="/dashboard">Dashboard</a>
+<br><br>
+
+<a href="/doctors">Find Doctors</a>
+<br><br>
+
+<a href="/logout">Logout</a>
+
+</div>
+
+<div class="dashboard">
+
+<h2>My Appointments</h2>
+
+<table class="table">
+
+<tr>
+<th>Doctor</th>
+<th>Date</th>
+<th>Slot</th>
+<th>Token</th>
+<th>Status</th>
+</tr>
+
+{% for a in appointments %}
+
+<tr>
+
+<td>{{a.doctor}}</td>
+
+<td>{{a.date}}</td>
+
+<td>{{a.slot}}</td>
+
+<td>{{a.token}}</td>
+
+<td>{{a.status}}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+<style>
+
+.token-box{
+width:420px;
+margin:auto;
+margin-top:120px;
+background:white;
+padding:40px;
+text-align:center;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.token{
+font-size:48px;
+color:#2d6cdf;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="token-box">
+
+<h2>Appointment Confirmed</h2>
+
+<p>Doctor: {{doctor}}</p>
+
+<p>Date: {{date}}</p>
+
+<p>Time: {{time}}</p>
+
+<h1 class="token">Token {{token}}</h1>
+
+<a class="btn" href="/dashboard">View Dashboard</a>
+
+</div>
+
+</body>
+</html>

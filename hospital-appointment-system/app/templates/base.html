@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital Appointment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+
+<body>
+
+<header>
+    <h2>Hospital System</h2>
+</header>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/login">Login</a>
+</nav>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

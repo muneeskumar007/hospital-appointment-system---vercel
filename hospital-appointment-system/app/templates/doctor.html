@@ -1,0 +1,851 @@
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Doctor Profile</title>
+
+<style>
+
+body{
+font-family:Segoe UI;
+background:#f4f6fb;
+margin:0;
+}
+
+.navbar{
+background:white;
+display:flex;
+justify-content:space-between;
+padding:15px 40px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo{
+font-size:20px;
+font-weight:bold;
+color:#2d6cdf;
+}
+
+
+.container{
+width:90%;
+margin:auto;
+margin-top:30px;
+}
+
+
+
+.grid{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:25px;
+}
+
+
+
+.profile-card{
+background:white;
+padding:25px;
+border-radius:12px;
+display:flex;
+gap:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.profile-card img{
+width:140px;
+height:140px;
+border-radius:10px;
+object-fit:cover;
+}
+
+.profile-info h2{
+margin:0;
+}
+
+.specialty{
+color:#2d6cdf;
+margin-top:5px;
+}
+
+
+
+.clinic-card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.clinic-item{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:15px;
+}
+
+
+
+.icon{
+font-size:20px;
+color:#2d6cdf;
+}
+
+
+.date-section{
+    margin-left:60px ;
+margin-top:30px;
+}
+
+.dates{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:10px;
+}
+
+.date{
+padding:10px 16px;
+border-radius:8px;
+background:#eef3ff;
+cursor:pointer;
+}
+
+
+.review-card{
+background:#f9fafc;
+padding:15px;
+border-radius:8px;
+margin-top:10px;
+}
+.reviews{
+    margin-left: 60px;
+background:white;
+padding:20px;
+border-radius:12px;
+margin-top:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.tags span{
+background:#eef2ff;
+padding:6px 12px;
+border-radius:20px;
+font-size:13px;
+margin-right:8px;
+}
+
+.date.active{
+background:#2d6cdf;
+color:white;
+}
+
+
+
+.slots{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:10px;
+margin-top:15px;
+}
+
+.slot{
+background:#eef3ff;
+padding:10px;
+text-align:center;
+border-radius:8px;
+cursor:pointer;
+}
+
+.slot:hover{
+background:#2d6cdf;
+color:white;
+}
+
+.slot.selected{
+background:#2d6cdf;
+color:white;
+}
+
+
+
+.selected-box{
+margin-top:20px;
+background:#f1f4fb;
+padding:15px;
+border-radius:8px;
+display:flex;
+justify-content:space-between;
+}
+
+
+
+button{
+background:#2d6cdf;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#1f4fb8;
+}
+
+
+
+@media(max-width:900px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.slots{
+grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+<div class="logo">HealthSync</div>
+</div>
+
+<div class="container">
+
+<div class="grid">
+
+
+
+<div class="profile-card">
+
+<img src="{{ doctor.image_url }}">
+
+<div class="profile-info">
+
+<h2>Dr {{ doctor.name }}</h2>
+
+<p class="specialty">
+{{ doctor.specialty }} • {{ doctor.experience }} Years Experience
+</p>
+
+<p>
+Providing quality healthcare with patient-centered treatment.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="clinic-card">
+
+<h3>Clinic Information</h3>
+
+<p><span class="icon">🏥</span><b>Hospital:</b> HeartCare Center</p>
+
+<p><span class="icon">📍</span><b>Address:</b> 123 Medical Plaza</p>
+
+<p> <span class="icon">🕒</span><b>Timing:</b> {{ doctor.availability_dates }}</p>
+
+<p><span class="icon">💰</span><b>Consultation Fee:</b> ₹{{ doctor.fee }}</p>
+
+</div>
+
+</div>
+
+</div>
+<div class="reviews">
+
+<h3>Recent Patient Reviews</h3>
+
+<div class="review-card">
+<b>Michael R.</b>
+<p>Extremely thorough and professional. Explained everything clearly.</p>
+</div>
+
+<div class="review-card">
+<b>Elena W.</b>
+<p>Short wait time and very friendly staff.</p>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="date-section">
+
+<h2>Schedule Appointment</h2>
+
+
+
+<div class="dates" id="dates">
+
+<div class="date">Mon 12</div>
+<div class="date">Tue 13</div>
+<div class="date">Wed 14</div>
+<div class="date">Thu 15</div>
+<div class="date">Fri 16</div>
+
+</div>
+
+
+
+<div class="slots" id="slots">
+
+<div class="slot">09:00 AM</div>
+<div class="slot">09:30 AM</div>
+<div class="slot">10:00 AM</div>
+<div class="slot">10:30 AM</div>
+<div class="slot">11:00 AM</div>
+<div class="slot">11:30 AM</div>
+
+<div class="slot">01:00 PM</div>
+<div class="slot">01:30 PM</div>
+<div class="slot">02:00 PM</div>
+<div class="slot">02:30 PM</div>
+<div class="slot">03:00 PM</div>
+<div class="slot">03:30 PM</div>
+
+</div>
+
+
+
+<div class="selected-box">
+
+<div id="selected">
+No appointment selected
+</div>
+
+<button>Confirm Booking</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+
+
+const dates = document.querySelectorAll(".date")
+
+dates.forEach(date=>{
+date.addEventListener("click",()=>{
+
+dates.forEach(d=>d.classList.remove("active"))
+date.classList.add("active")
+
+updateSelection()
+
+})
+})
+
+
+
+const slots = document.querySelectorAll(".slot")
+
+slots.forEach(slot=>{
+slot.addEventListener("click",()=>{
+
+slots.forEach(s=>s.classList.remove("selected"))
+slot.classList.add("selected")
+
+updateSelection()
+
+})
+})
+
+
+
+function updateSelection(){
+
+const activeDate = document.querySelector(".date.active")
+const activeSlot = document.querySelector(".slot.selected")
+
+if(activeDate && activeSlot){
+
+document.getElementById("selected").innerText =
+"Appointment: " + activeDate.innerText + " at " + activeSlot.innerText
+
+}
+
+}
+
+</script>
+
+</body>
+</html> -->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Doctor Profile</title>
+
+<style>
+
+body{
+font-family:Segoe UI;
+background:#f4f6fb;
+margin:0;
+}
+
+/* NAVBAR */
+
+.navbar{
+background:white;
+display:flex;
+justify-content:space-between;
+padding:15px 40px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo{
+font-size:20px;
+font-weight:bold;
+color:#2d6cdf;
+}
+
+/* CONTAINER */
+
+.container{
+width:90%;
+margin:auto;
+margin-top:30px;
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:25px;
+}
+
+/* PROFILE CARD */
+
+.profile-card{
+background:white;
+padding:25px;
+border-radius:12px;
+display:flex;
+gap:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.profile-card img{
+width:140px;
+height:140px;
+border-radius:10px;
+object-fit:cover;
+}
+
+.profile-info h2{
+margin:0;
+}
+
+.specialty{
+color:#2d6cdf;
+margin-top:5px;
+}
+
+/* CLINIC CARD */
+
+.clinic-card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.clinic-item{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:15px;
+}
+
+/* ICON STYLE */
+
+.icon{
+font-size:20px;
+color:#2d6cdf;
+}
+
+/* DATE SECTION */
+
+.date-section{
+margin-top:30px;
+margin-left: 70px;
+}
+
+.dates{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:10px;
+}
+
+.date{
+padding:10px 16px;
+border-radius:8px;
+background:#eef3ff;
+cursor:pointer;
+}
+
+.date.active{
+background:#2d6cdf;
+color:white;
+}
+
+/* SLOT SECTION */
+
+.slots{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:10px;
+margin-top:15px;
+}
+
+.slot{
+background:#eef3ff;
+padding:10px;
+text-align:center;
+border-radius:8px;
+cursor:pointer;
+}
+
+.slot:hover{
+background:#2d6cdf;
+color:white;
+}
+
+.slot.selected{
+background:#2d6cdf;
+color:white;
+}
+
+/* SELECTED */
+
+.selected-box{
+margin-top:20px;
+background:#f1f4fb;
+padding:15px;
+border-radius:8px;
+display:flex;
+justify-content:space-between;
+}
+
+/* BUTTON */
+
+button{
+background:#2d6cdf;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#1f4fb8;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.slots{
+grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+
+.review-card{
+background:#f9fafc;
+padding:15px;
+border-radius:8px;
+margin-top:10px;
+}
+.tags span{
+background:#eef2ff;
+padding:6px 12px;
+border-radius:20px;
+font-size:13px;
+margin-right:8px;
+}
+
+
+.btn {
+  background-color: #2d6cdf;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #1b4fa8;
+}
+.reviews{
+    margin-left: 60px;
+background:white;
+padding:20px;
+border-radius:12px;
+margin-top:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+<div class="logo">🏥 MediCare</div>
+<button>
+<a href="/" class="btn">
+    Home
+</a></button>
+</div>
+
+<div class="container">
+
+<div class="grid">
+
+<!-- PROFILE -->
+
+<div class="profile-card">
+
+<img src="/static/images/docavt.jpg">
+
+<div class="profile-info">
+
+<h2> {{ doctor.name }}</h2>
+
+<p class="specialty">
+{{ doctor.specialty }} • {{ doctor.experience }} Years Experience
+</p>
+
+<p>
+Providing quality healthcare with patient-centered treatment.
+</p>
+<div class="tags">
+<span>Heart Disease</span>
+<span>Hypertension</span>
+<span>Echocardiography</span>
+</div>
+</div>
+
+</div>
+
+<!-- CLINIC INFO -->
+
+<!-- <div class="clinic-card">
+
+<h3>Clinic Information</h3>
+
+<div class="clinic-item">
+<span class="icon">📍</span>
+<span>HeartCare Center</span>
+</div>
+
+<div class="clinic-item">
+<span class="icon">🏥</span>
+<span>123 Medical Plaza</span>
+</div> -->
+<div class="clinic-card">
+
+<h3>Clinic Information</h3>
+
+<p><span class="icon">🏥</span><b>Hospital:</b> HeartCare Center</p>
+
+<p><span class="icon">📍</span><b>Address:</b> 123 Medical Plaza</p>
+
+<p><span class="icon">🕒</span><b>Timing:</b> {{ doctor.availability_dates }}</p>
+
+<p><span class="icon">💰</span><b>Consultation Fee:</b> ₹{{ doctor.fee }}</p>
+
+</div>
+
+</div>
+<!-- 
+<div class="clinic-item">
+<span class="icon">🕒</span>
+<span>{{ doctor.availability_dates }}</span>
+</div>
+
+<div class="clinic-item">
+<span class="icon">💰</span>
+<span>₹{{ doctor.fee }}</span>
+</div> -->
+
+</div>
+
+</div>
+
+<div class="reviews">
+
+<h3>Recent Patient Reviews</h3>
+
+<div class="review-card">
+<b>Michael R.</b>
+<p>Extremely thorough and professional. Explained everything clearly.</p>
+</div>
+
+<div class="review-card">
+<b>Elena W.</b>
+<p>Short wait time and very friendly staff.</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- APPOINTMENT -->
+
+<div class="date-section">
+
+<h2>Schedule Appointment</h2>
+
+<!-- DATE SELECT -->
+
+<div class="dates" id="dates">
+
+<div class="date">Mon 12</div>
+<div class="date">Tue 13</div>
+<div class="date">Wed 14</div>
+<div class="date">Thu 15</div>
+<div class="date">Fri 16</div>
+
+</div>
+
+<!-- TIME SLOTS -->
+
+<div class="slots" id="slots">
+
+<div class="slot">09:00 AM</div>
+<div class="slot">09:30 AM</div>
+<div class="slot">10:00 AM</div>
+<div class="slot">10:30 AM</div>
+<div class="slot">11:00 AM</div>
+<div class="slot">11:30 AM</div>
+
+<div class="slot">01:00 PM</div>
+<div class="slot">01:30 PM</div>
+<div class="slot">02:00 PM</div>
+<div class="slot">02:30 PM</div>
+<div class="slot">03:00 PM</div>
+<div class="slot">03:30 PM</div>
+
+</div>
+
+<!-- SELECTED -->
+
+<div class="selected-box">
+
+<div id="selected">
+No appointment selected
+</div>
+<a href="/book/{{ doctor.id }}"
+style="
+background:#28a745;
+color:white;
+padding:10px 15px;
+text-decoration:none;
+border-radius:6px;
+">
+Confirm Booking
+</a>
+
+
+<!-- <button>
+<a href="{{ url_for('auth.login') }}?next={{ request.path }}" class="btn">Confirm Booking</a></button> -->
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* DATE CLICK */
+
+const dates = document.querySelectorAll(".date")
+
+dates.forEach(date=>{
+date.addEventListener("click",()=>{
+
+dates.forEach(d=>d.classList.remove("active"))
+date.classList.add("active")
+
+updateSelection()
+
+})
+})
+
+/* SLOT CLICK */
+
+const slots = document.querySelectorAll(".slot")
+
+slots.forEach(slot=>{
+slot.addEventListener("click",()=>{
+
+slots.forEach(s=>s.classList.remove("selected"))
+slot.classList.add("selected")
+
+updateSelection()
+
+})
+})
+
+/* UPDATE TEXT */
+
+function updateSelection(){
+
+const activeDate = document.querySelector(".date.active")
+const activeSlot = document.querySelector(".slot.selected")
+
+if(activeDate && activeSlot){
+
+document.getElementById("selected").innerText =
+"Appointment: " + activeDate.innerText + " at " + activeSlot.innerText
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
