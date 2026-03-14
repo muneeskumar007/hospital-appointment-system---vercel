@@ -66,10 +66,13 @@ def create_app():
 
     app = Flask(__name__)
 
-    app.secret_key = "hospital_secret_key"
+    app.secret_key = os.getenv('FLASK_SECRET_KEY', 'hospital_secret_key')
 
-    # PostgreSQL config
-    database_url = os.getenv('DATABASE_URL', 'postgresql://user:password@localhost/hospital_db')
+    # PostgreSQL config (Vercel supplies DATABASE_URL or VERCEL_POSTGRES_URL)
+    database_url = os.getenv('DATABASE_URL') or os.getenv('VERCEL_POSTGRES_URL')
+    if not database_url:
+        database_url = 'postgresql://user:password@localhost/hospital_db'
+
     app.config['SQLALCHEMY_DATABASE_URI'] = database_url
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
